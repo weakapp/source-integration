@@ -24,7 +24,7 @@ class SourceGitlabPlugin extends MantisSourceGitBasePlugin {
 	 * GitLab API version, used to build the API URI
 	 * @see api_uri()
 	 */
-	const API_VERSION = 'v4';
+	const API_VERSION = 'v3';
 
 	public $linkPullRequest = 'merge_requests/%s';
 
