@@ -241,15 +241,30 @@ class SourceGitlabPlugin extends MantisSourceGitBasePlugin {
 		}
 
 		$t_data = json_decode( $f_payload, true );
-		if( is_null( $t_data ) || !isset( $t_data['project_id'] )) {
+		if( is_null( $t_data ) ) {
+            return null;
+        }
+
+        $t_repo = $t_data['repository'];
+		if( is_null( $t_repo) ) {
+            return null;
+        }
+
+		if( !isset( $t_repo['url'] )) {
 			return null;
 		}
 
-		$t_repoid = $t_data['project_id'];
+        $t_pos = strpos($t_repo['url'], ':');
+        if (((($t_pos <= 0) {
+            return null;
+        }
+
+        $t_repo_name = substr($t_repo['url', $t_pos + 1, -4);
+
 		$t_repo_table = plugin_table( 'repository', 'Source' );
 
 		$t_query = "SELECT * FROM $t_repo_table WHERE info LIKE " . db_param();
-		$t_result = db_query( $t_query, array( '%' . $t_repoid . '%' ) );
+		$t_result = db_query( $t_query, array( '%' . $t_repo_name . '%' ) );
 
 		if ( db_num_rows( $t_result ) < 1 ) {
 			return null;
@@ -257,7 +272,7 @@ class SourceGitlabPlugin extends MantisSourceGitBasePlugin {
 		while ( $t_row = db_fetch_array( $t_result ) ) {
 			$t_repo = new SourceRepo( $t_row['type'], $t_row['name'], $t_row['url'], $t_row['info'] );
 			$t_repo->id = $t_row['id'];
-			if ( $t_repo->info['hub_repoid'] == $t_repoid ) {
+			if ( $t_repo->info['hub_reponame'] == $t_repo_name ) {
 				return array( 'repo' => $t_repo, 'data' => $t_data );
 			}
 		}
