@@ -158,9 +158,9 @@ MantisBT version | Tags | Branch | Notes
     **Source** plugin that new commits or revisions are available for import. This 
     improves user experience by eliminating delays between source control commits and 
     MantisBT state updates.
-
-    Refer to the configuration documentation for the relevant plugin extension(s) for more 
-    information.
+    
+            http://host.domain.tld/mantisbt/plugin.php?page=Source/checkin&api_key=<YOUR_API_KEY>
+   
 
 12. Add additional repositories as needed.
 
