@@ -246,7 +246,7 @@ class SourceGitlabPlugin extends MantisSourceGitBasePlugin {
         }
 
         $t_repo = $t_data['repository'];
-		if( is_null( $t_repo) ) {
+		if( is_null( $t_repo )) {
             return null;
         }
 
@@ -255,11 +255,11 @@ class SourceGitlabPlugin extends MantisSourceGitBasePlugin {
 		}
 
         $t_pos = strpos($t_repo['url'], ':');
-        if (((($t_pos <= 0) {
+        if ($t_pos <= 0) {
             return null;
         }
 
-        $t_repo_name = substr($t_repo['url', $t_pos + 1, -4);
+        $t_repo_name = substr($t_repo['url'], $t_pos + 1, -4);
 
 		$t_repo_table = plugin_table( 'repository', 'Source' );
 
