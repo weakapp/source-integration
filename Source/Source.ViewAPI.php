@@ -92,7 +92,8 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 			print_link_button(
 				$t_url,
 				plugin_lang_get( 'diff', 'Source' ),
-				'btn-xs'
+				'btn-xs',
+				true
 			);
 		}
 ?>
@@ -174,7 +175,8 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 				print_link_button(
 					$t_url,
 					plugin_lang_get( 'diff', 'Source' ),
-					'btn-xs'
+					'btn-xs',
+					true
 				);
 			}
 			echo "\n";
