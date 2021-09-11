@@ -43,7 +43,7 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 		$t_committer = Source_View_Committer( $t_changeset, false );
 ?>
 <tr>
-<td class="category width-25" rowspan="<?php echo count( $t_changeset->files ) + 1 ?>">
+<td class="category width-25" rowspan="<?php /*echo count( $t_changeset->files ) +*/ 1 ?>">
 	<a id="<?php echo $t_changeset->revision; ?>"></a>
 	<p class="no-margin"><?php
 		echo string_display(
@@ -162,8 +162,10 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 </td>
 
 </tr>
+<!--
 <?php
-		foreach( $t_changeset->files as $t_file ) {
+		//foreach( $t_changeset->files as $t_file ) {
+		if (0) {
 ?>
 <tr>
 <td class="small" colspan="2">
@@ -184,7 +186,8 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 				print_link_button(
 					$t_url,
 					plugin_lang_get( 'file', 'Source' ),
-					'btn-xs'
+					'btn-xs',
+					true
 				);
 			}
 ?>
@@ -194,6 +197,7 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 		} # end foreach changeset files
 	} # end foreach changesets
 }
+-->
 
 /**
  * Display the author information for a changeset.

@@ -259,12 +259,14 @@ if ( $t_can_update ) {
 <?php
 	print_extra_small_button(
 		$t_vcs->url_diff( $t_repo, $t_changeset, $t_file ),
-		plugin_lang_get( 'diff', 'Source' )
+		plugin_lang_get( 'diff', 'Source' ),
+		true
 	);
 	echo ' ';
 	print_extra_small_button(
 		$t_vcs->url_file( $t_repo, $t_changeset, $t_file ),
-		plugin_lang_get( 'file', 'Source' )
+		plugin_lang_get( 'file', 'Source' ),
+		true
 	);
 ?>
 </td>
