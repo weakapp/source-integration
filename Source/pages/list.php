@@ -49,7 +49,7 @@ layout_page_begin();
 								</a>
 							<?php
 							if( $t_url = $t_vcs->url_repo( $t_repo ) ) { ?>
-								<a class="btn btn-xs btn-primary btn-white btn-round" href="<?php echo string_display_line( $t_url ) ?>">
+								<a class="btn btn-xs btn-primary btn-white btn-round" href="<?php echo string_display_line( $t_url ) ?>" target="_blank">
 									<?php echo plugin_lang_get( 'browse' ) ?>
 								</a>
 							<?php } ?>
