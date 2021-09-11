@@ -162,7 +162,6 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 </td>
 
 </tr>
-<!--
 <?php
 		//foreach( $t_changeset->files as $t_file ) {
 		if (0) {
