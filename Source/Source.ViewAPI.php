@@ -197,7 +197,6 @@ function Source_View_Changesets( $p_changesets, $p_repos=null, $p_show_repos=tru
 		} # end foreach changeset files
 	} # end foreach changesets
 }
--->
 
 /**
  * Display the author information for a changeset.
