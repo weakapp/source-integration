@@ -193,20 +193,55 @@ class SourceBitBucketPlugin extends MantisSourceGitBasePlugin {
 	}
 
 	public function precommit() {
-		return;
+		$f_payload = file_get_contents( "php://input" );
+		if( is_null( $f_payload ) ) {
+			return null;
+		}
+
+		$t_data = json_decode( $f_payload, true );
+		if( is_null( $t_data ) ) {
+            return null;
+        }
+
+        $t_changes = $t_data['push']['changes'];
+        $t_repo = $t_data['repository'];
+		if( is_null( $t_repo )) {
+            return null;
+        }
+
+		$t_reponame = $t_repo['name'];
+
+		$t_repo_table = plugin_table( 'repository', 'Source' );
+
+		$t_query = "SELECT * FROM $t_repo_table WHERE info LIKE " . db_param();
+		$t_result = db_query( $t_query, array( '%' . $t_reponame . '%' ) );
+
+		if ( db_num_rows( $t_result ) < 1 ) {
+			return null;
+		}
+		while ( $t_row = db_fetch_array( $t_result ) ) {
+			$t_repo = new SourceRepo( $t_row['type'], $t_row['name'], $t_row['url'], $t_row['info'] );
+			$t_repo->id = $t_row['id'];
+			if ( $t_repo->info['bit_reponame'] == $t_reponame ) {
+				return array( 'repo' => $t_repo, 'data' => $t_changes );
+			}
+		}
+		return null;
 	}
 
 	public function commit( $p_repo, $p_data ) {
-		$t_commits = array();
+		$t_changesets = array();
 
-		foreach ( $p_data['commits'] as $t_commit ) {
-			$t_commits[] = $t_commit['id'];
-		}
+        foreach($p_data as $t_changes) {
+            $t_branch = $t_changes['new']['name'];
+			$t_commits = array($t_branch);
 
-		$t_refData = explode( '/', $p_data['ref'] );
-		$t_branch  = $t_refData[2];
-
-		return $this->import_commits( $p_repo, $t_commits, $t_branch );
+            foreach ( $t_changes['commits'] as $t_commit ) {
+                $t_commits[] = $t_commit['hash'];
+            }
+			$t_changesets = array_merge( $t_changesets, $this->import_commits( $p_repo, $t_commits, $t_branch ) );
+        }
+		return $t_changesets;
 	}
 
 	public function import_full( $p_repo, $p_use_cache = true ) {
