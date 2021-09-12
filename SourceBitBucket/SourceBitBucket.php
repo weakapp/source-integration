@@ -171,7 +171,9 @@ class SourceBitBucketPlugin extends MantisSourceGitBasePlugin {
 
 	private function api_json_url( $p_repo, $p_url ) {
 		$t_data = $this->url_get( $p_repo, $p_url );
-		$t_json = json_decode( utf8_encode( $t_data ) );
+		//$t_json = json_decode( utf8_encode( $t_data ) );
+		// no need to encode, it is already utf8
+		$t_json = json_decode( $t_data );
 		return $t_json;
 	}
 
