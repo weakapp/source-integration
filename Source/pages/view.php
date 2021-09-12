@@ -80,7 +80,7 @@ layout_page_begin();
 				<div class="widget-toolbox padding-8 clearfix">
 <?php
 	if ( $t_url = $t_vcs->url_changeset( $t_repo, $t_changeset ) ) {
-		print_extra_small_button($t_url, plugin_lang_get('diff', 'Source') );
+		print_extra_small_button($t_url, plugin_lang_get('diff', 'Source') , true);
 		echo ' ';
 	}
 	print_extra_small_button(
